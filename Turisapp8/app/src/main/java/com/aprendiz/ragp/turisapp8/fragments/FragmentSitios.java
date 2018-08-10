@@ -6,6 +6,7 @@ import android.graphics.Bitmap;
 import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
+import android.support.design.widget.FloatingActionButton;
 import android.support.v4.app.Fragment;
 import android.support.v7.widget.GridLayoutManager;
 import android.support.v7.widget.LinearLayoutManager;
@@ -14,6 +15,7 @@ import android.view.LayoutInflater;
 import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.Button;
 import android.widget.GridLayout;
 import android.widget.ImageView;
 import android.widget.TextView;
@@ -21,6 +23,8 @@ import android.widget.TextView;
 import com.aprendiz.ragp.turisapp8.R;
 import com.aprendiz.ragp.turisapp8.cotrollers.Detalle;
 import com.aprendiz.ragp.turisapp8.cotrollers.MenuT;
+import com.aprendiz.ragp.turisapp8.maps.MapsHoteles;
+import com.aprendiz.ragp.turisapp8.maps.MapsSitios;
 import com.aprendiz.ragp.turisapp8.models.AdapterT;
 import com.aprendiz.ragp.turisapp8.models.GestorDB;
 import com.aprendiz.ragp.turisapp8.models.Lugar;
@@ -38,6 +42,7 @@ public class FragmentSitios extends Fragment {
     int item;
     View view;
     public static Lugar lugar= new Lugar();
+    Button btnCambio;
 
     public FragmentSitios() {
         // Required empty public constructor
@@ -88,6 +93,22 @@ public class FragmentSitios extends Fragment {
                 }
             });
 
+            FloatingActionButton btnMapaT = view.findViewById(R.id.btnMapaT);
+            btnMapaT.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    Intent intent = new Intent(getContext(), MapsSitios.class);
+                    startActivity(intent);
+                }
+            });
+
+            btnCambio = view.findViewById(R.id.btnCambio);
+            btnCambio.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    switchModo();
+                }
+            });
 
 
 
@@ -127,10 +148,12 @@ public class FragmentSitios extends Fragment {
             case 0:
                 modo=1;
                 inputAdapter();
+                btnCambio.setBackground(getActivity().getDrawable(R.drawable.lista));
                 break;
 
             case 1:
                 modo=0;
+                btnCambio.setBackground(getActivity().getDrawable(R.drawable.cuatro));
                 inputAdapter();
                 break;
         }

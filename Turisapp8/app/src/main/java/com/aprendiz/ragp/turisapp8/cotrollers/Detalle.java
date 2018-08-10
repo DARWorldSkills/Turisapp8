@@ -35,6 +35,18 @@ public class Detalle extends AppCompatActivity {
         });
     }
 
+    @Override
+    protected void onResume() {
+        super.onResume();
+        inputData();
+    }
+
+    @Override
+    protected void onStart() {
+        super.onStart();
+        inputData();
+    }
+
     private void inizialite() {
         txtNombre = findViewById(R.id.txtNombreDescripcion);
         txtDescripcion = findViewById(R.id.txtDescripcion);
