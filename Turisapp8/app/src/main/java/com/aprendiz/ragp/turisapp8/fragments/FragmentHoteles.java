@@ -24,6 +24,7 @@ import com.aprendiz.ragp.turisapp8.R;
 import com.aprendiz.ragp.turisapp8.cotrollers.Detalle;
 import com.aprendiz.ragp.turisapp8.cotrollers.MenuT;
 import com.aprendiz.ragp.turisapp8.maps.MapsHoteles;
+import com.aprendiz.ragp.turisapp8.maps.Todos;
 import com.aprendiz.ragp.turisapp8.models.AdapterT;
 import com.aprendiz.ragp.turisapp8.models.GestorDB;
 import com.aprendiz.ragp.turisapp8.models.Lugar;
@@ -96,13 +97,18 @@ public class FragmentHoteles extends Fragment {
             });
 
             FloatingActionButton btnMapaT = view.findViewById(R.id.btnMapaT);
-            btnMapaT.setOnClickListener(new View.OnClickListener() {
-                @Override
-                public void onClick(View v) {
-                    Intent intent = new Intent(getContext(), MapsHoteles.class);
-                    startActivity(intent);
-                }
-            });
+            try {
+                btnMapaT.setOnClickListener(new View.OnClickListener() {
+                    @Override
+                    public void onClick(View v) {
+                        Intent intent = new Intent(getContext(), MapsHoteles.class);
+                        startActivity(intent);
+                    }
+                });
+            }catch (Exception e){
+
+            }
+
 
             btnCambio = view.findViewById(R.id.btnCambio);
             btnCambio.setOnClickListener(new View.OnClickListener() {
@@ -129,9 +135,20 @@ public class FragmentHoteles extends Fragment {
                 @Override
                 public void itemClick(int position) {
                     lugar = lugarList.get(position);
+                    MenuT.lugar = lugar;
                     txtDescricpcion.setText(lugar.getDescripcion());
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(),lugar.getImagen(),op);
                     imgDetalle.setImageBitmap(bitmap);
+                }
+            });
+
+            FloatingActionButton floatingActionButton = view.findViewById(R.id.floatingActionButton);
+            floatingActionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MenuT.lugar = lugar;
+                    Intent intent = new Intent(getContext(), Todos.class);
+                    startActivity(intent);
                 }
             });
 

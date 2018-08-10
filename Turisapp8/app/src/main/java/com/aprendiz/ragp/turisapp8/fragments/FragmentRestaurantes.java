@@ -24,6 +24,7 @@ import com.aprendiz.ragp.turisapp8.cotrollers.Detalle;
 import com.aprendiz.ragp.turisapp8.cotrollers.MenuT;
 import com.aprendiz.ragp.turisapp8.maps.MapsHoteles;
 import com.aprendiz.ragp.turisapp8.maps.MapsRestaurantes;
+import com.aprendiz.ragp.turisapp8.maps.Todos;
 import com.aprendiz.ragp.turisapp8.models.AdapterT;
 import com.aprendiz.ragp.turisapp8.models.GestorDB;
 import com.aprendiz.ragp.turisapp8.models.Lugar;
@@ -131,9 +132,20 @@ public class FragmentRestaurantes extends Fragment {
                 @Override
                 public void itemClick(int position) {
                     lugar = lugarList.get(position);
+
                     txtDescricpcion.setText(lugar.getDescripcion());
                     Bitmap bitmap = BitmapFactory.decodeResource(getResources(),lugar.getImagen(),op);
                     imgDetalle.setImageBitmap(bitmap);
+                }
+            });
+
+            FloatingActionButton floatingActionButton = view.findViewById(R.id.floatingActionButton);
+            floatingActionButton.setOnClickListener(new View.OnClickListener() {
+                @Override
+                public void onClick(View v) {
+                    MenuT.lugar = lugar;
+                    Intent intent = new Intent(getContext(), Todos.class);
+                    startActivity(intent);
                 }
             });
 
