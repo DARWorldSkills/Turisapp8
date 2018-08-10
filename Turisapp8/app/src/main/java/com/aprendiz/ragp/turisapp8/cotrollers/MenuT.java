@@ -19,9 +19,13 @@ import com.aprendiz.ragp.turisapp8.fragments.FragmentHoteles;
 import com.aprendiz.ragp.turisapp8.fragments.FragmentInicio;
 import com.aprendiz.ragp.turisapp8.fragments.FragmentRestaurantes;
 import com.aprendiz.ragp.turisapp8.fragments.FragmentSitios;
+import com.aprendiz.ragp.turisapp8.models.Lugar;
 
 public class MenuT extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
+
+    public static Lugar lugar =new Lugar();
+
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

@@ -44,7 +44,7 @@ public class AdapterT extends RecyclerView.Adapter<AdapterT.Holder> {
 
     @Override
     public void onBindViewHolder(Holder holder, int position) {
-
+        holder.connectData(lugarList.get(position));
     }
 
     @Override
