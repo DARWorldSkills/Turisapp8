@@ -19,6 +19,7 @@ import com.aprendiz.ragp.turisapp8.fragments.FragmentHoteles;
 import com.aprendiz.ragp.turisapp8.fragments.FragmentInicio;
 import com.aprendiz.ragp.turisapp8.fragments.FragmentRestaurantes;
 import com.aprendiz.ragp.turisapp8.fragments.FragmentSitios;
+import com.aprendiz.ragp.turisapp8.models.Constants;
 import com.aprendiz.ragp.turisapp8.models.Lugar;
 
 public class MenuT extends AppCompatActivity
@@ -42,6 +43,12 @@ public class MenuT extends AppCompatActivity
         NavigationView navigationView = (NavigationView) findViewById(R.id.nav_view);
         navigationView.setNavigationItemSelectedListener(this);
         navigationView.setItemIconTintList(null);
+
+        if (Constants.modo_inicio==0) {
+            Fragment fragment = new FragmentInicio();
+            getSupportFragmentManager().beginTransaction().replace(R.id.contenedor, fragment).commit();
+            Constants.modo_inicio=1;
+        }
     }
 
     @Override
