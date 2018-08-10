@@ -24,6 +24,7 @@ import com.aprendiz.ragp.turisapp8.models.Lugar;
 public class MenuT extends AppCompatActivity
         implements NavigationView.OnNavigationItemSelectedListener {
     public static Lugar lugar = new Lugar();
+gi
 
     @Override
     protected void onCreate(Bundle savedInstanceState) {

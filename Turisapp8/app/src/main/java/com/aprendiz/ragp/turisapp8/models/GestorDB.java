@@ -118,7 +118,7 @@ public class GestorDB extends SQLiteOpenHelper{
     public List<Lugar> listLugar(String lugar){
         List<Lugar> results = new ArrayList<>();
         SQLiteDatabase db = getReadableDatabase();
-        Cursor cursor = db.rawQuery("SELECT * FROM LUGARES WHERE LUGAR ='"+lugar+";",null);
+        Cursor cursor = db.rawQuery("SELECT * FROM LUGARES WHERE LUGAR ='"+lugar+"';",null);
         if (cursor.moveToFirst()){
             do {
                 Lugar lugar1 = new Lugar();
@@ -130,7 +130,7 @@ public class GestorDB extends SQLiteOpenHelper{
                 lugar1.setLatitud(cursor.getDouble(5));
                 lugar1.setLogitud(cursor.getDouble(6));
                 lugar1.setLugar(cursor.getString(7));
-
+                results.add(lugar1);
 
             }while (cursor.moveToNext());
 

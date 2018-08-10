@@ -1,6 +1,9 @@
 package com.aprendiz.ragp.turisapp8.fragments;
 
 
+import android.content.Intent;
+import android.graphics.Bitmap;
+import android.graphics.BitmapFactory;
 import android.os.Bundle;
 
 import android.support.v4.app.Fragment;
@@ -12,8 +15,12 @@ import android.view.Surface;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.GridLayout;
+import android.widget.ImageView;
+import android.widget.TextView;
 
 import com.aprendiz.ragp.turisapp8.R;
+import com.aprendiz.ragp.turisapp8.cotrollers.Detalle;
+import com.aprendiz.ragp.turisapp8.cotrollers.MenuT;
 import com.aprendiz.ragp.turisapp8.models.AdapterT;
 import com.aprendiz.ragp.turisapp8.models.GestorDB;
 import com.aprendiz.ragp.turisapp8.models.Lugar;
@@ -29,6 +36,8 @@ public class FragmentHoteles extends Fragment {
     RecyclerView recyclerView;
     List<Lugar> lugarList;
     int item;
+    View view;
+    public static Lugar lugar= new Lugar();
 
 
     public FragmentHoteles() {
@@ -40,7 +49,7 @@ public class FragmentHoteles extends Fragment {
     public View onCreateView(LayoutInflater inflater, ViewGroup container,
                              Bundle savedInstanceState) {
         // Inflate the layout for this fragment
-        View view = inflater.inflate(R.layout.fragment_fragment_hoteles, container, false);
+        view = inflater.inflate(R.layout.fragment_fragment_hoteles, container, false);
         recyclerView = view.findViewById(R.id.recyclerview);
         position = getActivity().getWindowManager().getDefaultDisplay().getRotation();
         GestorDB gestorDB = new GestorDB(getContext());
@@ -57,21 +66,28 @@ public class FragmentHoteles extends Fragment {
 
     private void inputAdapter() {
         if (position== Surface.ROTATION_0 || position==Surface.ROTATION_180){
+            AdapterT adapterT;
             if (modo == 0) {
                 item=R.layout.item_list;
+                adapterT = new AdapterT(lugarList,item,getContext());
+                recyclerView.setAdapter(adapterT);
+                recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
 
             }else {
                 item=R.layout.item_grid;
+                adapterT = new AdapterT(lugarList,item,getContext());
+                recyclerView.setAdapter(adapterT);
+                recyclerView.setHasFixedSize(true);
                 recyclerView.setLayoutManager(new GridLayoutManager(getContext(),2, GridLayout.VERTICAL,false));
             }
-            AdapterT adapterT = new AdapterT(lugarList,item,getContext());
-            recyclerView.setAdapter(adapterT);
-            recyclerView.setHasFixedSize(true);
+
             adapterT.setMlistener(new AdapterT.OnItemClickListener() {
                 @Override
                 public void itemClick(int position) {
-                    
+                    MenuT.lugar = lugarList.get(position);
+                    Intent intent = new Intent(getContext(), Detalle.class);
+                    startActivity(intent);
                 }
             });
 
@@ -79,14 +95,22 @@ public class FragmentHoteles extends Fragment {
         }else {
             item=R.layout.item_land;
             AdapterT adapterT = new AdapterT(lugarList,item,getContext());
-            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
             recyclerView.setAdapter(adapterT);
+            recyclerView.setLayoutManager(new LinearLayoutManager(getContext(),LinearLayoutManager.VERTICAL,false));
             recyclerView.setHasFixedSize(true);
+
+            final TextView txtDescricpcion = view.findViewById(R.id.txtDescripcionLand);
+            final ImageView imgDetalle = view.findViewById(R.id.imgLand);
+            final BitmapFactory.Options op = new BitmapFactory.Options();
+            op.inSampleSize=3;
 
             adapterT.setMlistener(new AdapterT.OnItemClickListener() {
                 @Override
                 public void itemClick(int position) {
-
+                    lugar = lugarList.get(position);
+                    txtDescricpcion.setText(lugar.getDescripcion());
+                    Bitmap bitmap = BitmapFactory.decodeResource(getResources(),lugar.getImagen(),op);
+                    imgDetalle.setImageBitmap(bitmap);
                 }
             });
 
