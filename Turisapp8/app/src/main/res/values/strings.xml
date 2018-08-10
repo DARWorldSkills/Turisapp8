@@ -14,4 +14,6 @@
     <string name="title_activity_maps_hoteles">Map</string>
     <string name="title_activity_maps_restaurantes">Map</string>
     <string name="title_activity_maps_sitios">Map</string>
+
+    <string name="textoinicio">Quindío Turistico es una app la cual te ayuda a ver los mejores sitios, lugares, restaurantes, hoteles de todo quindio para que puedas disfrutar cada minuto que estés en esta bella cuidad</string>
 </resources>

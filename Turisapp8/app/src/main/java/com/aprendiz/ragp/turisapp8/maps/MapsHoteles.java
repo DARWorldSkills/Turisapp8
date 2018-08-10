@@ -34,7 +34,15 @@ public class MapsHoteles extends FragmentActivity implements OnMapReadyCallback 
     public void onMapReady(GoogleMap googleMap) {
         mMap = googleMap;
 
+        GestorDB gestorDB = new GestorDB(this);
+        List<Lugar> lugarList = gestorDB.listLugar("hotel");
+        for (int i = 0; i < lugarList.size(); i++) {
+            LatLng latLng = new LatLng(lugarList.get(i).getLatitud(), lugarList.get(i).getLogitud());
+            mMap.addMarker(new MarkerOptions().position(latLng).title(lugarList.get(i).getNombre()));
+            mMap.moveCamera(CameraUpdateFactory.newLatLng(latLng));
 
         }
+
     }
+}
 
